@@ -35,6 +35,8 @@ namespace WebApplication.Api
             //    await context.Response.WriteAsync("Hello World!");
             //});
 
+            app.UseStatusCodePages();
+
             app.UseMvc();
         }
     }

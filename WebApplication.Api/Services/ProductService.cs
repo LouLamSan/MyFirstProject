@@ -20,21 +20,57 @@ namespace WebApplication.Api.Services
                 {
                     ID =1,
                     Name = "Coffee",
-                    Price = 2.5f
+                    Price = 2.5f,
+                    Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            ID = 1,
+                            Name = "Water"
+                        },
+
+                        new Material
+                        {
+                            ID = 2,
+                            Name = "Coffee"
+                        },
+
+                        new Material
+                        {
+                            ID = 3,
+                            Name = "Sugger"
+                        }
+                    }
                 },
 
                 new Product
                 {
                     ID =2,
                     Name = "Milk",
-                    Price = 3.0f
+                    Price = 3.0f,
+                    Materials = new List<Material>
+                    {
+                        new Material
+                        {
+                            ID = 4,
+                            Name = "Milk"
+                        }
+                    }
                 },
 
                 new Product
                 {
                     ID=3,
                     Name = "Beer",
-                    Price=5.5f
+                    Price=5.5f,
+                    Materials  = new List<Material>
+                    {
+                        new Material
+                        {
+                            ID = 5,
+                            Name = "Wheat"
+                        }
+                    }
                 }
             };
         }

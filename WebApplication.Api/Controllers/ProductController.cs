@@ -12,15 +12,20 @@ namespace WebApplication.Api.Controllers
     public class ProductController : Controller
     {
         [HttpGet]
-        public JsonResult GetProduct()
+        public IActionResult GetProduct()
         {
-            return new JsonResult(ProductService.Current.Products);
+            return Ok(ProductService.Current.Products);
         }
 
         [Route("{id}")]
-        public JsonResult GetProductByID(int id)
+        public IActionResult GetProductByID(int id)
         {
-            return new JsonResult(ProductService.Current.Products.SingleOrDefault(p => p.ID == id));
+            var product = ProductService.Current.Products.SingleOrDefault(p => p.ID == id);
+            if(product==null)
+            {
+                return NotFound();
+            }
+            return Ok(product);
         }
     }
 }
