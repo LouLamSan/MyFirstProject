@@ -21,6 +21,7 @@ namespace WebApplication.Api.Services
                     ID =1,
                     Name = "Coffee",
                     Price = 2.5f,
+                    Description = "This is coffee",
                     Materials = new List<Material>
                     {
                         new Material
@@ -48,6 +49,7 @@ namespace WebApplication.Api.Services
                     ID =2,
                     Name = "Milk",
                     Price = 3.0f,
+                    Description = "This is milk",
                     Materials = new List<Material>
                     {
                         new Material
@@ -63,6 +65,7 @@ namespace WebApplication.Api.Services
                     ID=3,
                     Name = "Beer",
                     Price=5.5f,
+                    Description = "This is beer",
                     Materials  = new List<Material>
                     {
                         new Material

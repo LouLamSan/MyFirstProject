@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,7 +53,8 @@ namespace WebApplication.Api.Controllers
             {
                 ID = ++maxId,
                 Name = product.Name,
-                Price = product.Price
+                Price = product.Price,
+                Description = product.Description
             };
 
             ProductService.Current.Products.Add(newProduct);
@@ -87,6 +89,43 @@ namespace WebApplication.Api.Controllers
 
             model.Name = product.Name;
             model.Price = product.Price;
+            model.Description = product.Description;
+
+            return NoContent();
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult Patch(int id,[FromBody] JsonPatchDocument<ProductModification> patchDoc)
+        {
+            if(patchDoc == null)
+            {
+                return BadRequest();
+            }
+
+            var model = ProductService.Current.Products.SingleOrDefault(p => p.ID == id);
+
+            if(model == null)
+            {
+                return NotFound();
+            }
+
+            var toPatch = new ProductModification
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price
+            };
+
+            patchDoc.ApplyTo(toPatch, ModelState);
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            model.Name = toPatch.Name;
+            model.Description = toPatch.Description;
+            model.Price = toPatch.Price;
 
             return NoContent();
         }
